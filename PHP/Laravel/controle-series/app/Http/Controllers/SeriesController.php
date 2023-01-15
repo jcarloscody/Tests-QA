@@ -62,11 +62,30 @@ class SeriesController extends Controller
 
        
 
-        $s = Serie::create($request->all()); //atribuição em massa
+        $serie = Serie::create($request->all()); //atribuição em massa
 
-         $request->session()->flash('mensagem.inserte', 'Serie inserida '. $s->nome);
+        //  $request->session()->flash('mensagem.inserte', 'Serie inserida '. $s->nome);
         // session(['mensagem.inserte'=>'Serie inserida '. $s->nome]);
 
+        $seasons = [];
+        for ($i = 1; $i <= $request->seasonsQty; $i++) {
+            $seasons[] = [
+                'series_id' => $serie->id,
+                'number' => $i,
+            ];
+        }
+        Season::insert($seasons);
+
+        $episodes = [];
+        foreach ($serie->seasons as $season) {
+            for ($j = 1; $j <= $request->episodesPerSeason; $j++) {
+                $episodes[] = [
+                    'season_id' => $season->id,
+                    'number' => $j
+                ];
+            }
+        }
+        Episode::insert($episodes);
 
         // return redirect('/series');
         return to_route('series.index');
