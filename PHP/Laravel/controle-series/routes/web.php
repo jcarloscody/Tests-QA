@@ -32,5 +32,8 @@ Route::get('/', function () {
 // Route::resource('/series', SeriesController::class)
 // ->only(['index', 'create', 'store', 'destroy', 'edit', 'update']);
 
+// Route::resource('/series', SeriesController::class)
+//     ->except(['show']);
+
 Route::resource('/series', SeriesController::class)
-    ->except(['show']);
+->except(['show']);
