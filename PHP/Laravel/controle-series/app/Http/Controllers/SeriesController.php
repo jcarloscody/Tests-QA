@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Serie;
+use App\Http\Requests\SeriesFormRequest;
 
 
 class SeriesController extends Controller
 {
-    public function index(Request $request){
+    public function index(SeriesFormRequest $request){
     
         // $series = DB::select('select nome from series;');
         // $series = Serie::all();
@@ -47,7 +48,7 @@ class SeriesController extends Controller
         // return view('listar-series',\compact('series'))->with('series', $series);
     }
 
-    public function store(Request $request){
+    public function store(SeriesFormRequest $request){
         // $nomeSerie = $request->input('nome');
         $nomeSerie = $request->nome;
         
@@ -63,7 +64,7 @@ class SeriesController extends Controller
         // Serie::create($request->only(['name_collumn'])); 
         // Serie::create($request->except(['name_collumn']));
 
-        $request->validate(['nome'=>['required', 'min:10']]);
+       
 
         $s = Serie::create($request->all()); //atribuição em massa
 
@@ -83,7 +84,7 @@ class SeriesController extends Controller
         ->with('act', 'series.store');
     }
 
-    public function destroy(Request $request){
+    public function destroy(SeriesFormRequest $request){
         $s = Serie::find($request->series);
         Serie::destroy($request->series);
 
@@ -99,7 +100,7 @@ class SeriesController extends Controller
         return view('series.edit')->with('serie', $series);
     }
 
-    public function update(Serie $series, Request $request)
+    public function update(Serie $series, SeriesFormRequest $request)
     {
         $series->fill($request->all());
         $series->save();
