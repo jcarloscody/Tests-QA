@@ -15,6 +15,8 @@
 - É a capacidade de injetar script em um site.
 
 
+
+
 - Gerenciador de dependencia de front 
   - npm
   - yarm
@@ -24,6 +26,9 @@
   - ELOQUENT - nome do orm do laravel
 
 -  Cross-Site Request Forgery (CSRF): Todo formulário que nós enviamos para o Laravel precisa ter uma informação extra: um token. Esse token permite que o Laravel verifique que a requisição realmente foi enviada por um formulário do site. bastando usar a diretiva @csrf do blade. :-D
+
+- sessão: o php permite q vc armazene uma informação pequena no servidor, e depois por meio de um cookie que o servidor manda para o client, ele consegue identificar que vc é o dono daquela sessão. 
+
 
 - webpack: tem um arquivo configuravel que dizemos o que o webpack deve fazer com os arquivos de front-end, como mover arquivo de um local para outro, aplicar plugins...
 - laravel-mix: um pacote js q configura o webpack.  O Laravel Mix não tem nenhuma relação com PHP. É um pacote disponível inclusive para projetos que não utilizam Laravel. A ideia dele é simplificar a configuração do Webpack, que é uma ferramenta JavaScript.

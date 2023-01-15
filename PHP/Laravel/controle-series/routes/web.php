@@ -27,4 +27,6 @@ Route::get('/', function () {
 //     Route::post('/series/salvar',  'store' )->name('series.store');
 // });
 
-Route::resource('/series', SeriesController::class);
+// Route::resource('/series', SeriesController::class);
+// Route::delete('/series/destroy/{serie}', [SeriesController::class, 'destroy'] )->name('series.destroy');
+Route::resource('/series', SeriesController::class)->only(['index', 'create', 'store', 'destroy']);

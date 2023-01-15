@@ -31,12 +31,19 @@ class SeriesController extends Controller
         //   return  $request->get('id');
         //   return  $request->method();
         //   return  $request->url();
-        // return response('', 302, ['Location'=>'https://google.com']);
+        //   return response('', 302, ['Location'=>'https://google.com']);
         //   return redirect('https://google.com');
        
-        echo $request->get('nome');
+        // echo $request->get('nome');
         
-        return view('series.index',\compact('series'));
+        $mensagemDelete = $request->session()->get('mensagem.sucesso'); //session('mensagem.sucesso')
+        // $request->session()->forget('mensagem.sucesso'); com o uso no flash no destroy, ela já é esquecida automaticamente
+        $mensagemInserte = session('mensagem.inserte');
+
+
+        return view('series.index', compact('series'))
+        ->with('mensagemSucesso', $mensagemDelete)
+        ->with('insertSucess', $mensagemInserte);
         // return view('listar-series',\compact('series'))->with('series', $series);
     }
 
@@ -45,25 +52,40 @@ class SeriesController extends Controller
         $nomeSerie = $request->nome;
         
 
-    //     if (DB::insert('insert into series (nome) values (?)', [$nomeSerie])) {
-    //         return redirect('/series');
-    //    } else {
-    //         return "NOT OK";
-    //    }
+        //     if (DB::insert('insert into series (nome) values (?)', [$nomeSerie])) {
+        //         return redirect('/series');
+        //    } else {
+        //         return "NOT OK";
+        //    }
         // $serie = new Serie();
         // $serie->nome = $nomeSerie;
         // $serie->save();
         Serie::create($request->all()); //atribuição em massa
         // Serie::create($request->only(['name_collumn'])); 
-        // Serie::create($request->except(['name_collumn'])); 
+        // Serie::create($request->except(['name_collumn']));
+
+        // $request->session()->flash('mensagem.inserte', 'Serie inserida');
+        session(['mensagem.inserte'=>'Serie inserida']);
+
+        
+
         // return redirect('/series');
         return to_route('series.index');
 
     }
 
     public function create(){
+      
         return view('series.create');
     }
 
+    public function destroy(Request $request){
+        Serie::destroy($request->series);
 
+        // $request->session()->put('mensagem.sucesso', 'Serie '.$request->series.' removida com sucesso');
+        $request->session()->flash('mensagem.sucesso', 'Serie '.$request->series.' removida com sucesso');
+        session(['key'=>'value']);
+
+        return to_route('series.index');
+    }
 }
