@@ -1,8 +1,18 @@
 <form action="{{ $action }}" method="post">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     @csrf
-    @isset($nome)
+    @if($update)
         @method('PUT')
-    @endisset
+    @endif
     <div class="mb-3">
         <label for="nome" class="form-label">Nome:</label>
         <input type="text"
