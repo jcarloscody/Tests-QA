@@ -60,14 +60,13 @@ class SeriesController extends Controller
         // $serie = new Serie();
         // $serie->nome = $nomeSerie;
         // $serie->save();
-        Serie::create($request->all()); //atribuição em massa
         // Serie::create($request->only(['name_collumn'])); 
         // Serie::create($request->except(['name_collumn']));
+        $s = Serie::create($request->all()); //atribuição em massa
 
-        // $request->session()->flash('mensagem.inserte', 'Serie inserida');
-        session(['mensagem.inserte'=>'Serie inserida']);
+         $request->session()->flash('mensagem.inserte', 'Serie inserida '. $s->nome);
+        // session(['mensagem.inserte'=>'Serie inserida '. $s->nome]);
 
-        
 
         // return redirect('/series');
         return to_route('series.index');
@@ -76,16 +75,33 @@ class SeriesController extends Controller
 
     public function create(){
       
-        return view('series.create');
+        return view('series.create')
+        ->with('meth', 'POST')
+        ->with('act', 'series.store');
     }
 
     public function destroy(Request $request){
+        $s = Serie::find($request->series);
         Serie::destroy($request->series);
 
         // $request->session()->put('mensagem.sucesso', 'Serie '.$request->series.' removida com sucesso');
-        $request->session()->flash('mensagem.sucesso', 'Serie '.$request->series.' removida com sucesso');
-        session(['key'=>'value']);
+        // $request->session()->flash('mensagem.sucesso', 'Serie '.$s->nome.' removida com sucesso');
+        //session(['key'=>'value']);
 
-        return to_route('series.index');
+        return to_route('series.index')->with('mensagem.sucesso', 'Serie '.$s->nome.' removida com sucesso');
+    }
+
+    public function edit(Serie $series)
+    {
+        return view('series.edit')->with('serie', $series);
+    }
+
+    public function update(Serie $series, Request $request)
+    {
+        $series->fill($request->all());
+        $series->save();
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' atualizada com sucesso");
     }
 }
