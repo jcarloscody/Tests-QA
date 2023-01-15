@@ -62,6 +62,9 @@ class SeriesController extends Controller
         // $serie->save();
         // Serie::create($request->only(['name_collumn'])); 
         // Serie::create($request->except(['name_collumn']));
+
+        $request->validate(['nome'=>['required', 'min:10']]);
+
         $s = Serie::create($request->all()); //atribuição em massa
 
          $request->session()->flash('mensagem.inserte', 'Serie inserida '. $s->nome);
