@@ -1,0 +1,2 @@
+- Teste e2e (end to end): teste que verifica o funcionamento da aplicação como um todo.Um teste E2E realmente utiliza a aplicação como se fosse um usuário real. Se é uma aplicação web, como no nosso caso, abre um navegador, interage com links, formulários, etc.
+- 
