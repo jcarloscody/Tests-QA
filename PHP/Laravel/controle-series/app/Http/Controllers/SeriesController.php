@@ -41,7 +41,8 @@ class SeriesController extends Controller
     }
 
     public function store(Request $request){
-        $nomeSerie = $request->input('nome');
+        // $nomeSerie = $request->input('nome');
+        $nomeSerie = $request->nome;
         
 
     //     if (DB::insert('insert into series (nome) values (?)', [$nomeSerie])) {
@@ -49,10 +50,14 @@ class SeriesController extends Controller
     //    } else {
     //         return "NOT OK";
     //    }
-        $serie = new Serie();
-        $serie->nome = $nomeSerie;
-        $serie->save();
-        return redirect('/series');
+        // $serie = new Serie();
+        // $serie->nome = $nomeSerie;
+        // $serie->save();
+        Serie::create($request->all()); //atribuição em massa
+        // Serie::create($request->only(['name_collumn'])); 
+        // Serie::create($request->except(['name_collumn'])); 
+        // return redirect('/series');
+        return to_route('series.index');
 
     }
 

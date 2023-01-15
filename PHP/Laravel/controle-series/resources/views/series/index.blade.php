@@ -1,5 +1,5 @@
 <x-layout title="Series">
-    <a href="/series/criar" class="btn btn-dark mb-2">Criar Series</a>
+    <a href="{{ route('series.create') }}" class="btn btn-dark mb-2">Criar Series</a>
    {{-- <?php// foreach ($series as $value):?>
     <li><?= // $value;?></li>
     <?php// endforeach;?> --}}
