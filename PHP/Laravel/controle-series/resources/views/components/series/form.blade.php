@@ -1,4 +1,4 @@
-<form action="{{ $action }}" method="post">
+<form action="{!! $action !!}" method="post">
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
