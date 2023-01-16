@@ -1,0 +1,47 @@
+1 PASSO
+https://chocolatey.org/install
+choco install git
+
+2 PASSO
+JDK Java - https://www.oracle.com/br/java/technologies/javase/javase8-archive-downloads.html
+Criar Folders em C:/  DevPrograms/jdk/jdk8
+
+3 PASSO
+Variaveis de Ambiente (sistema ou usuario): Excluir os paths relativo ao java
+
+4 PASSO
+Dentro do powerShell
+New-Item -ItemType SymbolicLink -Path "C:\DevPrograms\jdk\current" -Target "C:\DevPrograms\jdk\jdk8"
+
+5 PASSO
+Variaveis de Ambiente (usuario): 
+criar nova Variavel:
+JAVA_HOME : path do current que esta no jdk
+no path colocar:
+%JAVA_HOME%\bin
+
+6 PASSO
+Mudar o jdk:
+New-Item -ItemType SymbolicLink -Path "C:\DevPrograms\jdk\current" -Target "C:\DevPrograms\jdk\jdk11" -Force
+
+7 PASSO
+SDK Flutter em DevPrograms
+git clone https://github.com/flutter/flutter.git -b stable
+
+8 PASSO
+Variaveis de Ambiente (usuario): 
+FLUTTER_HOME :: C:\DevPrograms\flutter
+em PATH:: %FLUTTER_HOME%\bin
+
+9 PASSO 
+flutter --version
+flutter doctor
+
+10 PASSO
+FVM Agora
+- Excluir o flutter da variavel de sistema
+no PowerShell:   choco install fvm   OU  https://fvm.app/docs/getting_started/installation/
+
+
+
+flutter 3.0.5 SasMine
